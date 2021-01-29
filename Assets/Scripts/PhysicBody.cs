@@ -10,6 +10,7 @@ public class PhysicBody : MonoBehaviour
     Vector3 m_force = Vector3.zero;
     [SerializeField]
     float m_masse = 1;
+    public float Masse { get => m_masse;  }
 
     public void Integrate(float _dt) {
         m_velocity += m_force / m_masse * _dt;
