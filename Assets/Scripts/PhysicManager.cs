@@ -27,8 +27,8 @@ public class PhysicManager : MonoBehaviour
         Gizmos.color = color;
         Gizmos.DrawRay(pos, direction);
 
-        Vector3 right = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 + arrowHeadAngle, 0) * new Vector3(0, 0, 1);
-        Vector3 left = Quaternion.LookRotation(direction) * Quaternion.Euler(0, 180 - arrowHeadAngle, 0) * new Vector3(0, 0, 1);
+        Vector3 right = Quaternion.AngleAxis(arrowHeadAngle, Vector3.forward) * -direction ;
+        Vector3 left = Quaternion.AngleAxis(-arrowHeadAngle, Vector3.forward) * -direction ;
         Gizmos.DrawRay(pos + direction, right * arrowHeadLength);
         Gizmos.DrawRay(pos + direction, left * arrowHeadLength);
     }
