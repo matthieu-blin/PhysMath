@@ -23,6 +23,8 @@ public class PhysicDisc : PhysicShape
     private LineRenderer LineDrawer;
     private float Theta = 0f;
 
+    public float Radius { get => m_Radius;  }
+
     protected override void Start()
     {
         base.Start();

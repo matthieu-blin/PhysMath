@@ -22,6 +22,9 @@ public class PhysicRect : PhysicShape
 
     private LineRenderer LineDrawer;
 
+    public float Height { get => m_Height; }
+    public float Width { get => m_Width; }
+
     protected override void Start()
     {
         base.Start();
@@ -41,15 +44,34 @@ public class PhysicRect : PhysicShape
     }
     public void Update()
     {
-        float halfH =  m_Height / 2;
-        float halfW =  m_Width / 2;
         Vector3[] pos = new Vector3[4];
-        pos[0] = transform.TransformPoint( new Vector3( - halfW,  - halfH, 0));
-        pos[1] = transform.TransformPoint(new Vector3( + halfW,  - halfH, 0));
-        pos[2] = transform.TransformPoint(new Vector3( + halfW,  + halfH, 0));
-        pos[3] = transform.TransformPoint(new Vector3( - halfW,  + halfH, 0));
+        for (int i = 0; i < 4; i++)
+            pos[i] = GetPoint(i);
         LineDrawer.SetPositions(pos);
         LineDrawer.positionCount = 4;
+    }
+
+    public Vector2 this[int index]
+    {
+        get => GetPoint(index);
+    }
+
+    Vector2 GetPoint(int index)
+    {
+        float halfH = m_Height / 2;
+        float halfW = m_Width / 2;
+        switch (index)
+        {
+            case 0:
+                return transform.TransformPoint(new Vector3(-halfW, -halfH, 0));
+            case 1:
+                return transform.TransformPoint(new Vector3(+halfW, -halfH, 0));
+            case 2:
+                return transform.TransformPoint(new Vector3(+halfW, +halfH, 0));
+            case 3:
+                return transform.TransformPoint(new Vector3(-halfW, +halfH, 0));
+        }
+        return Vector2.zero;
     }
 
 }
