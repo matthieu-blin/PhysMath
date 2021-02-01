@@ -178,15 +178,18 @@ public class PhysicManager : MonoBehaviour
     class Projection
     {
         public Projection(float _min, float _max) { Min = _min; Max = _max; }
-        public float getOverlap(Projection other)
+
+
+        public bool overlaps(Projection _other)
         {
-            if (Max > other.Min)
+            return !(Min > _other.Max || _other.Min > Max);
+        }
+
+        public float getOverlap(Projection _other)
+        {
+            if (overlaps(_other))
             {
-                return Max - Min; 
-            }
-            else if (Min > other.Max)
-            {
-                return Min - Max;
+                return Math.Min(Max, _other.Max) - Math.Max(Min, _other.Min) ;
             }
             return -1;
         }
@@ -202,8 +205,8 @@ public class PhysicManager : MonoBehaviour
         Func<PhysicRect, Vector2, Projection> project = (r, axis) => 
         {
             float min = float.MaxValue ;
-            float max = 0;
-            for (int i = 1; i < 4; i++)
+            float max = float.MinValue;
+            for (int i = 0; i < 4; i++)
             {
                 // NOTE: the axis must be normalized to get accurate projections
                 float p = Vector2.Dot(axis, r[i]);
@@ -242,9 +245,15 @@ public class PhysicManager : MonoBehaviour
                     smallest = axis;
                 }
             }
+            else
+            {
+                //no overlap : no collision
+                return null;
+            }
         }
+        Vector2 perpendicular = new Vector2(-smallest.y, smallest.x);
         return new Collision(
-            _a.transform.position + (_a.transform.position - _b.transform.position), //should project on axis 
-             smallest* overlap);
+            _a.transform.position + (_b.transform.position - _a.transform.position).normalized * (_a.Height + _a.Width) /2, //should project on axis 
+             (_b.transform.position - _a.transform.position).normalized * overlap);
     }
 }
