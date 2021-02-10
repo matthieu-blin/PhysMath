@@ -8,7 +8,7 @@ public class PhysicDisc : PhysicShape
     float m_Radius = 1;
     public override float GetInertia()
     {
-        return m_physicBody.Masse * m_Radius * m_Radius;
+        return 0.5f *  m_physicBody.Masse * m_Radius * m_Radius;
     }
     public override Vector2 GetCentroid() 
     {
