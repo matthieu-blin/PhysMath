@@ -23,7 +23,7 @@ public class PhysicBody : MonoBehaviour
     public Vector3 Velocity { get => m_velocity;  }
 
     public void Integrate(float _dt) {
-        var constraint = GetComponent<Pendulum>();
+        var constraint = GetComponent<Constraint>();
         Vector3 force = m_force;
         if (constraint)
             force += constraint.ComputeConstraint();
