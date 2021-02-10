@@ -19,9 +19,16 @@ public class PhysicBody : MonoBehaviour
     float m_angle = 0f;
 
     public float Masse { get => m_masse;  }
+    public Vector3 Force { get => m_force;  }
+    public Vector3 Velocity { get => m_velocity;  }
 
     public void Integrate(float _dt) {
-        m_velocity += m_force / m_masse * _dt;
+        var constraint = GetComponent<Pendulum>();
+        Vector3 force = m_force;
+        if (constraint)
+            force += constraint.ComputeConstraint();
+
+        m_velocity += force   / m_masse * _dt;
         transform.position += m_velocity * _dt;
         var shape = GetComponent<PhysicShape>();
         if (shape != null)
