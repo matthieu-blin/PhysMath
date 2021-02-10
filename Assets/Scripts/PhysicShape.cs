@@ -2,7 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[ExecuteInEditMode]
 [RequireComponent(typeof(PhysicBody))]
+[RequireComponent(typeof(LineRenderer))]
 public class PhysicShape : MonoBehaviour
 {
     protected PhysicBody m_physicBody = null;

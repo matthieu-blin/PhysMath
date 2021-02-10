@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[ExecuteInEditMode]
-[RequireComponent(typeof(LineRenderer))]
 public class PhysicDisc : PhysicShape
 {
     [SerializeField]
