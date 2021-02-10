@@ -27,7 +27,7 @@ public class PhysicBody : MonoBehaviour
         if (shape != null)
         {
             var arm = m_ApplicationPoint - shape.GetCentroid();
-            float torque = Vector2.Dot(arm, m_force);
+            float torque = arm.x * m_force.y - arm.y * m_force.x;
             float angularAcceleration = torque / shape.GetInertia();
             m_angularVelocity = m_angularVelocity + angularAcceleration * _dt;
             m_angle += m_angularVelocity * _dt;
