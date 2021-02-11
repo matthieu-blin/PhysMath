@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,37 +18,8 @@ public class PhysicRect : PhysicShape
         return Vector2.zero;
     }
 
-
-    private LineRenderer LineDrawer;
-
     public float Height { get => m_Height; }
     public float Width { get => m_Width; }
-
-    protected override void Start()
-    {
-        base.Start();
-        LineDrawer = GetComponent<LineRenderer>();
-
-        LineDrawer.startWidth = 0.1f;
-        LineDrawer.endWidth = 0.1f;
-        LineDrawer.startColor = Color.green;
-        LineDrawer.endColor = Color.green;
-        Material mat = new Material(Shader.Find("GUI/Text Shader"));
-        LineDrawer.material = mat;
-    }
-
-    public void OnDestroy()
-    {
-        DestroyImmediate(LineDrawer.material);
-    }
-    public void Update()
-    {
-        Vector3[] pos = new Vector3[4];
-        for (int i = 0; i < 4; i++)
-            pos[i] = GetPoint(i);
-        LineDrawer.SetPositions(pos);
-        LineDrawer.positionCount = 4;
-    }
 
     public Vector2 this[int index]
     {
@@ -72,5 +44,12 @@ public class PhysicRect : PhysicShape
         return Vector2.zero;
     }
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.green;
+        Gizmos.matrix = transform.localToWorldMatrix;
+        Gizmos.DrawWireCube( Vector3.zero, new Vector3(m_Width , m_Height));        
+    }
 }
 
