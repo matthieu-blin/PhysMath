@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using Bk;
 using UnityEngine;
 
 public class PhysicManager : MonoBehaviour
@@ -37,7 +38,7 @@ public class PhysicManager : MonoBehaviour
     {
         foreach (Collision col in m_currentCollision)
         {
-            ForGizmo(col.Point, col.Force, Color.red);
+           Bk.Gizmos.DrawArrow(col.Point, col.Force, Color.red);
         }
     }
 
