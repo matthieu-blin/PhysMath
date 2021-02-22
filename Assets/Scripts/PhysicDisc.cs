@@ -11,9 +11,9 @@ public class PhysicDisc : PhysicShape
     {
         return 0.5f *  m_physicBody.Masse * m_Radius * m_Radius;
     }
-    public override Vector2 GetCentroid() 
+    public override Vector2 GetCentroid()
     {
-        return Vector2.zero;
+        return transform.position;
     }
 
     public float Radius { get => m_Radius;  }

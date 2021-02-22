@@ -1,12 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Constraint : MonoBehaviour
 {
-    public virtual Vector3 ComputeConstraint()
+    public virtual void ComputeConstraint()
     {
-        return new Vector3(1, 1, 1);
     }
 
     protected PhysicBody m_body;
@@ -15,5 +15,4 @@ public class Constraint : MonoBehaviour
     {
         m_body = GetComponent<PhysicBody>();
     }
-
 }

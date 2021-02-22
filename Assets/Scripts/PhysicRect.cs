@@ -15,13 +15,14 @@ public class PhysicRect : PhysicShape
     }
     public override Vector2 GetCentroid()
     {
-        return Vector2.zero;
+        return transform.position;
     }
 
     public float Height { get => m_Height; }
     public float Width { get => m_Width; }
 
-    public Vector2 this[int index]
+    public int VCount { get => 4;}
+    public Vector3 this[int index]
     {
         get => GetPoint(index);
     }

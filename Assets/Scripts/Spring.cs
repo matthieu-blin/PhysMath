@@ -7,17 +7,11 @@ public class Spring : Constraint
 
     public Transform m_transform;
     public float m_stiffness = 0.2f;
-    public float m_dampingCoefficient = 0.4f;
-    public override Vector3 ComputeConstraint()
+    public float m_dampingCoefficient = 1.4f;
+    public override void ComputeConstraint()
     {
         Vector3  dist = transform.position - m_transform.position;
-        return  -dist * m_stiffness - m_body.Velocity *  m_dampingCoefficient ;
-    }
-
-
-    protected override void Start()
-    {
-        base.Start();
+        m_body.NForce =  -dist * m_stiffness - m_body.Velocity *  m_dampingCoefficient ;
     }
 
     void OnDrawGizmos()
